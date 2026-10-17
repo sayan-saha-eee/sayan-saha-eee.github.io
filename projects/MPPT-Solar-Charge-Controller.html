@@ -1,1 +1,206 @@
 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPPT Solar Charge Controller</title>
+    <script src="https://kit.fontawesome.com/b36891ad23.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="wrap">
+            <div class="logo">SAYAN SAHA</div>
+
+            <div class="tabbar">
+                <a href="../../index.html">Home</a>
+
+                <a href="../../projects.html" class="active">Projects</a>
+
+            </div>
+            <details class="mobile-menu">
+                <summary>☰</summary>
+                <div class="mobile-links">
+                    <a href="../../index.html">Home</a>
+
+                    <a href="../../projects.html">Projects</a>
+
+                </div>
+            </details>
+        </nav>
+    </header>
+
+    <main class="wrap project-layout">
+
+        <aside class="sidebar-nav">
+            <ul>
+                <li><a href="#Introduction">Introduction</a></li>
+                <li><a href="#details">Design</a></li>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#development">Development</a></li>
+            </ul>
+        </aside>
+
+
+        <div class="project-content">
+            <h2>MPPT Solar Charge Controller</h2>
+
+            <div id="Introduction" class="content-section">
+                <h3>Introduction</h3>
+                <p>Solar photovoltaic (PV) systems exhibit nonlinear
+                    voltage- current characteristics, and their
+                    maximum power point (MPP) varies continuously
+                    with changes in solar irradiance and temperature.
+                    Conventional charge controllers operate the
+                    solar panel at a fixed operating point, which
+                    leads to significant power loss and reduced
+                    charging efficiency.</p>
+                <p>
+                    Additionally, improper charging of batteries can cause overcharging, deep discharging, heating, and
+                    reduced battery lifespan. Hence, there is a need for a smart solar charge controller that can:
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Continuously extract maximum available power from the solar panel.</strong></li>
+                    <li><strong>Efficiently regulate the charging process of the battery.</strong></li>
+                    <li><strong>Ensure safe, reliable, and optimal charging under varying environmental
+                            conditions.</strong></li>
+                </ul>
+                </p>
+                <p>
+                    in this project, I designed and implemented an MPPT-based solar charge controller using a buck
+                    converter, controlled by an embedded system, to maximize energy harvesting and ensure efficient
+                    battery charging
+                </p>
+            </div>
+
+            <div id="Theory" class="content-section">
+                <h3>Maximum Power Point</h3>
+                <div class="wiki-thumb">
+                    <img src="../../images/pv_characteristics.png" alt="Axial Flux BLDC Motor">
+                </div>
+                <p>
+                    Photovoltaic (PV) cells exhibit a nonlinear voltage-current (<i>V</i>-<i>I</i>)
+                    characteristic, where the current remains nearly constant at low voltages and
+                    then drops sharply as the voltage approaches the open-circuit value
+                    (<i>V</i><sub>oc</sub>). At zero voltage, the current is maximum, known as the
+                    short-circuit current (<i>I</i><sub>sc</sub>), while at zero current, the voltage
+                    reaches <i>V</i><sub>oc</sub>. The power output of the PV cell, given by
+                    <i>P</i> = <i>V</i> &times; <i>I</i>, varies with the operating point and
+                    produces a power-voltage (<i>P</i>-<i>V</i>) curve that peaks at the Maximum
+                    Power Point (MPP). This point, defined by <i>V</i><sub>mpp</sub> and
+                    <i>I</i><sub>mpp</sub>, represents the condition where the panel delivers maximum
+                    power. Since the MPP shifts with changes in irradiance and temperature, MPPT
+                    techniques are required to ensure optimal energy extraction.
+                </p>
+                <h3>Perturb and Observe Algorithm</h3>
+                <div class="wiki-thumb">
+                    <img src="../../images/pno.png" alt="Axial Flux BLDC Motor">
+                </div>
+                <p>
+                    The Perturb and Observe (P&amp;O) method is used to track the maximum power point.
+                    First, the solar panel voltage (<i>V</i>) and current (<i>I</i>) are measured, and
+                    the output power, <i>P</i> = <i>V</i> &times; <i>I</i>, is calculated. Then, the
+                    present power value is compared with the previous power value. If power increases,
+                    the duty cycle continues changing in the same direction; if power decreases, the
+                    duty cycle direction is reversed. PWM signals based on the updated duty cycle are
+                    used to drive the converter. In this project, the buck converter is driven at a frequency of
+                    19&nbsp;kHz with a 12-bit resolution.
+                    This is looped continuously to always maintain operation at the maximum power point.
+                </p>
+            </div>
+            <h3>Li-ion Charging</h3>
+            <div class="wiki-thumb">
+                <img src="../../images/cc_cv.png" alt="Axial Flux BLDC Motor">
+            </div>
+            <p>
+                A typical lithium-ion cell has a nominal voltage of 3.6&nbsp;V with a maximum voltage
+                of 4.2&nbsp;V and is generally discharged to a cutoff voltage of 2.5&nbsp;V. Charging
+                is performed using a constant current&ndash;constant voltage (CC&ndash;CV) profile. In
+                the initial stage, the system operates in constant current mode, where a fixed current
+                is supplied to the battery, causing its voltage to rise gradually. Once the battery
+                voltage reaches a predefined threshold (4.2&nbsp;V for Li-ion cells), the system transitions
+                to constant voltage mode, where the voltage is kept constant and the charging current decreases
+                as the battery approaches full charge. This method makes sure the battery is charging
+                efficiently while preventing overcurrent and overvoltage, thereby improving battery life
+                and safety.
+            </p>
+
+        </div>
+
+
+        <div id="details" class="content-section">
+            <h3>System Overview</h3>
+            <p>
+                The control algorithm operates in multiple modes to ensure efficiency and safe battery charging.
+                Initially, an Under-Voltage Lockout (UVLO) condition verifies whether the input voltage is sufficient
+                for normal operation; if insufficient, the converter is disabled. Once active, the system operates
+                across MPPT, Constant Current (CC), or Constant Voltage (CV) modes. In MPPT mode, the Perturb and
+                Observe (P&amp;O) algorithm continuously tracks the Maximum Power Point by adjusting the PWM duty cycle
+                based on real-time changes in input power and voltage. An outer feedback loop continuously monitors the
+                output: if the current exceeds the safe threshold, the controller regulates via CC mode, and once the
+                battery voltage reaches its limit, it transitions into CV mode.
+            </p>
+            <p>
+                The entire working logic is driven by an ESP32 microcontroller. As the solar panel generates a DC
+                voltage dependent on irradiance, an INA219 sensor measures panel voltage and current over an
+                I<sup>2</sup>C bus. The microcontroller computes the instantaneous power (<i>P</i> = <i>V</i> &times;
+                <i>I</i>) and dynamically adjusts the duty cycle to generate a high-frequency PWM driving signal for the
+                buck converter switches. The <a href="buck_converter.html" class="any-link target="_blank">synchronous buck converter</a> steps down the voltage to supply the battery
+                while continuous monitoring prevents overcharging, maintaining safe and optimal charging throughput.
+            </p>
+            <figure style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                <img src="../../images/system_overview.png" alt="Stator Design in OnShape" style="max-width: 80%;">
+                <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                    System Overview</figcaption>
+            </figure>
+
+        </div>
+
+        <div id="components" class="content-section">
+            <h3>Components</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Solar Panel:</strong> 12V 1W</li>
+                <li><strong>Li-ion Cell:</strong> 220 mAh</li>
+                <li><strong>Current Sensor:</strong> INA219</li>
+                <li><strong>ESP 32:</strong> Microcontroller for the control logic and PWM</li>
+                <li><strong>Display:</strong> Microcontroller for PWM signal generation</li>
+                <li><strong><a href="buck_converter.html" class="any-link">Synchronous Buck Converter</a></strong></li>
+        </div>
+
+        <div id="development" class="content-section">
+            <h3>Development</h3>
+
+            <!-- Image 1: Full Row (Spans 2 columns) -->
+            <figure style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                <img src="../../images/prototype.png" alt="Prototype" style="width: 100%; height: auto;">
+                <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;"> Prototype
+                </figcaption>
+            </figure>
+
+
+        </div>
+        </div>
+    </main>
+
+    <footer>
+        <span>&copy;2026 Sayan Saha </span>
+        <span>
+            <a href="https://www.linkedin.com/in/sayan-saha-626a5a28b/" target="_blank" title="Open Linkedin Profile">
+                <i class="fa-brands fa-linkedin fa-xl"></i>
+                LinkedIn
+            </a>
+            <a href="https://github.com/SayanSaha-EEE" target="_blank" title="Open Github">
+                <i class="fa-brands fa-github fa-xl"></i>
+                GitHub
+            </a>
+            <a href="mailto:sayan.s.personal@gmail.com" title="Open Mail">
+                <i class="fa-regular fa-envelope fa-xl"></i>
+                E-Mail
+            </a>
+        </span>
+    </footer>
+</body>
+
+</html>
