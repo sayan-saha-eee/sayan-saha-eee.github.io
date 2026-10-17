@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synchronous Buck Converter - Sayan Saha</title>
+    <script src="https://kit.fontawesome.com/b36891ad23.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+<header>
+    <nav class="wrap">
+        <div class="logo">SAYAN SAHA</div>
+
+        <div class="tabbar">
+            <a href="../../index.html">Home</a>
+        
+            <a href="../../projects.html" class="active">Projects</a>
+   
+        </div>
+        <details class="mobile-menu">
+            <summary>☰</summary>
+            <div class="mobile-links">
+                <a href="../../index.html">Home</a>
+    
+                <a href="../../projects.html">Projects</a>
+         
+            </div>
+        </details>
+    </nav>
+</header>
+
+<main class="wrap project-layout">
+
+    <aside class="sidebar-nav">
+        <ul>
+            <li><a href="#description">Description</a></li>
+            <li><a href="#details">Technical Details</a></li>
+            <li><a href="#components">Key Components</a></li>
+        </ul>
+    </aside>
+
+    <div class="project-content">
+        <h2>Programmable Synchronous Buck Converter</h2>
+        <div class="wiki-thumb">
+            <img src="../../images/electronics-parts-displayed-stockcake.jpg" alt="Buck Converter">
+        </div>    
+        <div id="description" class="content-section">
+            <h3>Description</h3>
+            <p>I designed a synchronous buck converter using the IR2104 half-bridge driver and IRLB8743 MOSFETs. The converter can be controlled by any microcontroller using PWM. Peak efficiency reached approximately 92% in continuous conduction mode (tested at 12V input, 7V / 2A output using an ESP32 at 19kHz, 12-bit PWM).</p>
+        </div>
+
+        <div id="details" class="content-section">
+            <h3>Technical Details</h3>
+            <p style="margin-bottom: 16px;">A synchronous buck converter replaces the traditional freewheeling diode with a low-side MOSFET, significantly reducing conduction losses and improving high-current efficiency.</p>
+            <p><strong>Operation & Limitations:</strong> Proper gate driving and dead-time control are critical to avoid shoot-through short circuits. The IR2104 handles this with a fixed 500ns dead time. While functioning as expected, the fixed dead-time and complementary switching limit control flexibility. Additionally, reverse current backflow occurs when output voltage exceeds input voltage—a known topology limitation.</p>
+        </div>
+
+        <div id="components" class="content-section">
+            <h3>Key Components</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>IR2104</strong> - Half-Bridge Gate Driver</li>
+                <li><strong>IRLB8743</strong> - N-Channel MOSFETs (High-side and Low-side)</li>
+                <li><strong>Inductor & Capacitor</strong> - LC Output Filter</li>
+                <li><strong>Bootstrap Diode & Capacitor</strong> - For high-side MOSFET driving</li>
+                <li><strong>ESP32</strong> - Microcontroller (used for PWM testing)</li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+
+<footer>
+    <span>&copy;2026 Sayan Saha </span>
+    <span>
+        <a href="https://www.linkedin.com/in/sayan-saha-626a5a28b/" target="_blank" title="Open Linkedin Profile">
+            <i class="fa-brands fa-linkedin fa-xl"></i>
+            LinkedIn
+        </a>
+        <a href="https://github.com/SayanSaha-EEE" target="_blank" title="Open Github">
+            <i class="fa-brands fa-github fa-xl"></i>
+            GitHub
+        </a>
+        <a href="mailto:sayan.s.personal@gmail.com" title="Open Mail">
+            <i class="fa-regular fa-envelope fa-xl"></i>
+            E-Mail
+        </a>
+    </span>
+</footer>
+</body>
+
+</html>
