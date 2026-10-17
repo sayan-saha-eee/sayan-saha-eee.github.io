@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synchronous Buck Converter - Sayan Saha</title>
+    <script src="https://kit.fontawesome.com/b36891ad23.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="wrap">
+            <div class="logo">SAYAN SAHA</div>
+
+            <div class="tabbar">
+                <a href="../../index.html">Home</a>
+
+                <a href="../../projects.html" class="active">Projects</a>
+
+            </div>
+            <details class="mobile-menu">
+                <summary>☰</summary>
+                <div class="mobile-links">
+                    <a href="../../index.html">Home</a>
+
+                    <a href="../../projects.html">Projects</a>
+
+                </div>
+            </details>
+        </nav>
+    </header>
+
+    <main class="wrap project-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar-nav">
+            <ul>
+                <li><a href="#description">Description</a></li>
+                <li><a href="#details">Technical Details</a></li>
+                <li><a href="#components">Key Components</a></li>
+            </ul>
+        </aside>
+
+
+        <div class="project-content">
+            <h2>Axial FLux BLDC Motor</h2>
+            <div class="wiki-thumb">
+                <img src="../../images/electronics-parts-displayed-stockcake.jpg" alt="Buck Converter">
+            </div>
+            <div id="description" class="content-section">
+                <h3>Introduction</h3>
+                <p>Axial flux brushless DC (BLDC) motors offer a compact alternative to conventional radial flux motors,
+                    with magnetic flux flowing parallel to the motor's rotational axis. Axial Flux has the benifits of
+                    compactness and adjustable air gap and is easier to fabricate for a DIY project. In this project I
+                    made a prototype of a coreless axial flux BLDC motor. Why coreless? Since it was a DIY project, I
+                    wanted to keep the cost low. It also had the added benifits of being lightweight. A Halbach Array
+                    was used to focus the magnetic flux on one side.</p>
+            </div>
+
+            <div id="details" class="content-section">
+                <h3>Development</h3>
+                <p style="margin-bottom: 8px;">i) Rotor:</p>
+                <ul style="margin-bottom: 16px;">
+                    <li><strong>Number of Poles:</strong> The rotor is designed to have 12 poles with 24 N35 grade
+                        neodymium magnets arranged in Halbach array.</li>
+                    <li><strong>Halbach array:</strong> Generally, a BLDC motor has magnets with alternating poles.
+                        Since, I opted for a coreless design, it is necessary to maximise the magnetic flux density in
+                        the air gap.
+                        To achieve this,I used a Halbach array. In this configuration, magnets are positioned with
+                        polarity at 0, 90, 180… degrees.
+                        This concentrates the magnetic field on one side and weakens the other side.
+                        The trade-off is that this needs twice the number of magnets than a conventional alternating
+                        pole arrangement, increasing the overall cost.</li>
+                    <li><strong>Dimensions:</strong>
+                        <ul>
+                            <li>Inner radius: 9.5 mm</li>
+                            <li>Outer radius: 40 mm</li>
+                            <li>Depth: 10 mm</li>
+                        </ul>
+                    </li>
+                    <li><strong>Material Used:</strong>Material Used: 3D printed with PLA plastic.</li>
+
+                </ul>
+                <p style="margin-bottom: 8px;">ii) Stator:</p>
+                <ul style="margin-bottom: 16px;">
+                    <li><strong>Number of Poles:</strong> The stator is designed to have 18 coils with 30 turns per
+                        coil. The coils
+                        are connected in Y configuration. So, total turns is 18 x 30= 540 turns.</li>
+                    <li><strong>Dimensions:</strong>
+                        <ul>
+                            <li>Radius: 40 mm</li>
+                            <li>Depth: 12 mm</li>
+                        </ul>
+                    </li>
+                    <li><strong>Material Used:</strong>Material Used: 3D printed with PLA plastic.</li>
+
+                </ul>
+       
+            </div>
+
+            <div id="components" class="content-section">
+                <h3>Components</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Neodymium magnets(N35)</strong> - 10x10x2mm (24pcs)</li>
+                    <li><strong>Enameled copper wire</strong> - 24SWG</li>
+                    <li><strong>ESC 30A </strong> - for testing.</li>
+                    <li><strong>Battery Pack</strong> - 3s Lipo(compatible with the ESC.</li>
+                    <li><strong>Arduino Uno</strong> - Microcontroller for PWM signal generation</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <span>&copy;2026 Sayan Saha </span>
+        <span>
+            <a href="https://www.linkedin.com/in/sayan-saha-626a5a28b/" target="_blank" title="Open Linkedin Profile">
+                <i class="fa-brands fa-linkedin fa-xl"></i>
+                LinkedIn
+            </a>
+            <a href="https://github.com/SayanSaha-EEE" target="_blank" title="Open Github">
+                <i class="fa-brands fa-github fa-xl"></i>
+                GitHub
+            </a>
+            <a href="mailto:sayan.s.personal@gmail.com" title="Open Mail">
+                <i class="fa-regular fa-envelope fa-xl"></i>
+                E-Mail
+            </a>
+        </span>
+    </footer>
+</body>
+
+</html>
