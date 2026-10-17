@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synchronous Buck Converter - Sayan Saha</title>
+    <title>Axial Flux BLDC Motor/</title>
     <script src="https://kit.fontawesome.com/b36891ad23.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../style.css">
 </head>
@@ -36,30 +36,31 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar-nav">
             <ul>
-                <li><a href="#description">Description</a></li>
-                <li><a href="#details">Technical Details</a></li>
-                <li><a href="#components">Key Components</a></li>
+                <li><a href="#Introduction">Introduction</a></li>
+                <li><a href="#details">Design</a></li>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#development">Development</a></li>
             </ul>
         </aside>
 
 
         <div class="project-content">
-            <h2>Axial FLux BLDC Motor</h2>
+            <h2>Axial Flux BLDC Motor</h2>
             <div class="wiki-thumb">
-                <img src="../../images/electronics-parts-displayed-stockcake.jpg" alt="Buck Converter">
+                <img src="../../images/axial_flux_bldc_motor/assembled.png" alt="Axial Flux BLDC Motor">
             </div>
-            <div id="description" class="content-section">
+            <div id="Introduction" class="content-section">
                 <h3>Introduction</h3>
                 <p>Axial flux brushless DC (BLDC) motors offer a compact alternative to conventional radial flux motors,
-                    with magnetic flux flowing parallel to the motor's rotational axis. Axial Flux has the benifits of
+                    with magnetic flux flowing parallel to the motor's rotational axis. Axial Flux has the benefits of
                     compactness and adjustable air gap and is easier to fabricate for a DIY project. In this project I
                     made a prototype of a coreless axial flux BLDC motor. Why coreless? Since it was a DIY project, I
-                    wanted to keep the cost low. It also had the added benifits of being lightweight. A Halbach Array
+                    wanted to keep the cost low. It also had the added benefits of being lightweight. A Halbach Array
                     was used to focus the magnetic flux on one side.</p>
             </div>
 
             <div id="details" class="content-section">
-                <h3>Development</h3>
+                <h3>Design</h3>
                 <p style="margin-bottom: 8px;">i) Rotor:</p>
                 <ul style="margin-bottom: 16px;">
                     <li><strong>Number of Poles:</strong> The rotor is designed to have 12 poles with 24 N35 grade
@@ -72,6 +73,18 @@
                         This concentrates the magnetic field on one side and weakens the other side.
                         The trade-off is that this needs twice the number of magnets than a conventional alternating
                         pole arrangement, increasing the overall cost.</li>
+
+                    <li style="list-style: none;">
+                        <figure
+                            style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                            <img src="../../images/axial_flux_bldc_motor/halbach_array.png" alt="Rotor in OnShape" style="max-width: 80%;">
+                            <figcaption
+                                style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; display: flex; justify-content: space-between; width: 80%;">
+                                <span>Halbach Array Configuration</span>
+                                <span style="font-size: 0.8rem;">Credits: Wikipedia</span>
+                            </figcaption>
+                        </figure>
+                    </li>
                     <li><strong>Dimensions:</strong>
                         <ul>
                             <li>Inner radius: 9.5 mm</li>
@@ -79,8 +92,15 @@
                             <li>Depth: 10 mm</li>
                         </ul>
                     </li>
-                    <li><strong>Material Used:</strong>Material Used: 3D printed with PLA plastic.</li>
-
+                    <li><strong>Material Used:</strong> 3D printed with PLA plastic.</li>
+                    <li style="list-style: none;">
+                        <figure
+                            style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                            <img src="../../images/axial_flux_bldc_motor/rotor.png" alt="Rotor Design in OnShape" style="max-width: 80%;">
+                            <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                                Rotor Design in OnShape</figcaption>
+                        </figure>
+                    </li>
                 </ul>
                 <p style="margin-bottom: 8px;">ii) Stator:</p>
                 <ul style="margin-bottom: 16px;">
@@ -93,21 +113,64 @@
                             <li>Depth: 12 mm</li>
                         </ul>
                     </li>
-                    <li><strong>Material Used:</strong>Material Used: 3D printed with PLA plastic.</li>
+                    <li><strong>Material Used:</strong> 3D printed with PLA plastic.</li>
 
+                    <li style="list-style: none;">
+                        <figure
+                            style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                            <img src="../../images/axial_flux_bldc_motor/stator.png" alt="Stator Design in OnShape" style="max-width: 80%;">
+                            <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                                Stator Design in OnShape</figcaption>
+                        </figure>
+                    </li>
                 </ul>
-       
             </div>
 
             <div id="components" class="content-section">
                 <h3>Components</h3>
                 <ul style="margin-left: 20px; line-height: 1.8;">
-                    <li><strong>Neodymium magnets(N35)</strong> - 10x10x2mm (24pcs)</li>
-                    <li><strong>Enameled copper wire</strong> - 24SWG</li>
-                    <li><strong>ESC 30A </strong> - for testing.</li>
-                    <li><strong>Battery Pack</strong> - 3s Lipo(compatible with the ESC.</li>
-                    <li><strong>Arduino Uno</strong> - Microcontroller for PWM signal generation</li>
+                    <li><strong>Neodymium magnets (N35):</strong> 10x10x2mm (24pcs)</li>
+                    <li><strong>Enameled copper wire:</strong> 24SWG</li>
+                    <li><strong>ESC 30A:</strong> for testing</li>
+                    <li><strong>Battery Pack:</strong> 3S Lipo (compatible with the ESC)</li>
+                    <li><strong>Arduino Uno:</strong> Microcontroller for PWM signal generation</li>
                 </ul>
+            </div>
+
+            <div id="development" class="content-section">
+                <h3>Development</h3>
+                <div
+                    style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 1px ;row-gap: 16px; margin: 16px 0;">
+
+
+                    <figure
+                        style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/axial_flux_bldc_motor/3d_printing.png" alt="3D Printing" style=" max-width: 80%; ">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">3D
+                            Printing Stage</figcaption>
+                    </figure>
+
+                    <figure
+                        style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/axial_flux_bldc_motor/stator_rotor_assembled.png" alt="Stator and Rotor Assembled" style="max-width: 80%; ">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            Stator & Rotor Assembled</figcaption>
+                    </figure>
+
+                    <figure style="margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/axial_flux_bldc_motor/assembled.png" alt="Assembled" style=" max-width: 80%;">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            Fully Assembled</figcaption>
+                    </figure>
+
+                    <figure style="margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/axial_flux_bldc_motor/testing.png" alt="Testing"
+                            style="width:auto; height: 87%; max-width: 80%; ">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            Testing Phase</figcaption>
+                    </figure>
+
+                </div>
             </div>
         </div>
     </main>
