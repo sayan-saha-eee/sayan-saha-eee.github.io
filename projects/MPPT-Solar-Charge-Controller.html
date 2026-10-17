@@ -36,8 +36,9 @@
     <main class="wrap project-layout">
 
         <aside class="sidebar-nav">
-            <ul>
+         <ul>
                 <li><a href="#Introduction">Introduction</a></li>
+                <li><a href="#Theory">Insights</a></li>
                 <li><a href="#details">Design</a></li>
                 <li><a href="#components">Components</a></li>
                 <li><a href="#development">Development</a></li>
@@ -61,13 +62,13 @@
                 <p>
                     Additionally, improper charging of batteries can cause overcharging, deep discharging, heating, and
                     reduced battery lifespan. Hence, there is a need for a smart solar charge controller that can:
+                </p>
                 <ul style="margin-left: 20px; line-height: 1.8;">
                     <li><strong>Continuously extract maximum available power from the solar panel.</strong></li>
                     <li><strong>Efficiently regulate the charging process of the battery.</strong></li>
                     <li><strong>Ensure safe, reliable, and optimal charging under varying environmental
                             conditions.</strong></li>
                 </ul>
-                </p>
                 <p>
                     in this project, I designed and implemented an MPPT-based solar charge controller using a buck
                     converter, controlled by an embedded system, to maximize energy harvesting and ensure efficient
@@ -78,7 +79,7 @@
             <div id="Theory" class="content-section">
                 <h3>Maximum Power Point</h3>
                 <div class="wiki-thumb">
-                    <img src="../../images/pv_characteristics.png" alt="Axial Flux BLDC Motor">
+                    <img src="../../images/mppt_solar_charge_controller/pv_characteristics.png" alt="PV Characteristics Curve">
                 </div>
                 <p>
                     Photovoltaic (PV) cells exhibit a nonlinear voltage-current (<i>V</i>-<i>I</i>)
@@ -96,7 +97,7 @@
                 </p>
                 <h3>Perturb and Observe Algorithm</h3>
                 <div class="wiki-thumb">
-                    <img src="../../images/pno.png" alt="Axial Flux BLDC Motor">
+                    <img src="../../images/mppt_solar_charge_controller/pno.png" alt="Perturb and Observe Algorithm Flowchart">
                 </div>
                 <p>
                     The Perturb and Observe (P&amp;O) method is used to track the maximum power point.
@@ -112,7 +113,7 @@
             </div>
             <h3>Li-ion Charging</h3>
             <div class="wiki-thumb">
-                <img src="../../images/cc_cv.png" alt="Axial Flux BLDC Motor">
+                <img src="../../images/mppt_solar_charge_controller/cc_cv.png" alt="CC-CV Charging Profile">
             </div>
             <p>
                 A typical lithium-ion cell has a nominal voltage of 3.6&nbsp;V with a maximum voltage
@@ -151,7 +152,7 @@
                 while continuous monitoring prevents overcharging, maintaining safe and optimal charging throughput.
             </p>
             <figure style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
-                <img src="../../images/system_overview.png" alt="Stator Design in OnShape" style="max-width: 80%;">
+                <img src="../../images/mppt_solar_charge_controller/system_overview.png" alt="System Overview" style="max-width: 80%;">
                 <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
                     System Overview</figcaption>
             </figure>
@@ -174,7 +175,7 @@
 
             <!-- Image 1: Full Row (Spans 2 columns) -->
             <figure style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
-                <img src="../../images/prototype.png" alt="Prototype" style="width: 100%; height: auto;">
+                <img src="../../images/mppt_solar_charge_controller/prototype.png" alt="Prototype" style="width: 100%; height: auto;">
                 <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;"> Prototype
                 </figcaption>
             </figure>
