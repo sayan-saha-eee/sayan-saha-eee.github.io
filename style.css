@@ -456,3 +456,16 @@ footer span a:hover {
 .project-content h2 + * {
     margin-top: 24px;
 }
+
+.any-link {
+    display: inline-block;
+    color: inherit;
+      text-decoration: underline;
+    transition: transform 0.2s ;
+}
+
+.any-link:hover {
+    color: #0070f3;
+    text-decoration: underline;
+
+}
