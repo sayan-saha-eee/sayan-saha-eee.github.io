@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LC Meter</title>
+    <script src="https://kit.fontawesome.com/b36891ad23.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="wrap">
+            <div class="logo">SAYAN SAHA</div>
+
+            <div class="tabbar">
+                <a href="../../index.html">Home</a>
+
+                <a href="../../projects.html" class="active">Projects</a>
+
+            </div>
+            <details class="mobile-menu">
+                <summary>☰</summary>
+                <div class="mobile-links">
+                    <a href="../../index.html">Home</a>
+
+                    <a href="../../projects.html">Projects</a>
+
+                </div>
+            </details>
+        </nav>
+    </header>
+
+
+
+
+
+
+
+
+    <main class="wrap project-layout">
+        <aside class="sidebar-nav">
+            <ul>
+                <li><a href="#Introduction">Introduction</a></li>
+                <li><a href="#Insights">Insights</a></li>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#development">Development</a></li>
+
+            </ul>
+        </aside>
+
+        <div class="project-content">
+            <h2>LC Meter</h2>
+
+            <div id="Introduction" class="content-section">
+                <h3>Introduction</h3>
+                <p>This project is about building a low-cost digital LC meter using an Arduino to measure the inductance
+                    and capacitance of basic electrical components. It's a fairly simple project that has been built by
+                    many electronics enthusiasts, so the goal wasn't to create something new or complex, but to have
+                    some
+                    fun, and build a useful little tool. </p>
+            </div>
+            <div id="Insights" class="content-section"></div>
+            <h3>Capacitance Measurement</h3>
+            <div class="wiki-thumb">
+                <img src="../../images/cap_charging.png" alt="Capacitor Charging" style="max-width: 100%;">
+                <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                    Synchronous Buck Converter</figcaption>
+            </div>
+            <p>The method opted for the measurement of unknown capacitor (C<sub>x</sub>) is based on the transient
+                response of the RC circuit. In an RC circuit, when the DC voltage (V<sub>in</sub>) is applied through
+                the resistor (R, whose value is known), the voltage across the capacitor, V<sub>c</sub>(t) rises
+                according to (1)</p>
+
+            <p style="text-align: center;">V<sub>c</sub>(t) = V<sub>in</sub>(1 - e<sup>-t/RC</sup>)
+                &nbsp;&nbsp;&nbsp;&nbsp;-------(1)</p>
+
+            <p>Time constant for capacitor is the time it takes for voltage V<sub>c</sub>(t) to rise to 63.2% of the
+                full charge voltage. The larger the capacitor, the larger is the time constant due to
+                the fact they take more time to charge. In equation (1), RC is the time constant TC. We can find the
+                value of the unknown capacitance for the formula. Since the value of the resistance is already known, we
+                can obtain the capacitance as</p>
+
+            <p style="text-align: center;">C<sub>x</sub> = TC / R &nbsp;&nbsp;&nbsp;&nbsp;--------(2)</p>
+
+
+
+        </div>
+
+        <div id="details" class="content-section">
+            <h3>Inductance Measurement </h3>
+            <div class="wiki-thumb">
+                <img src="../../images/ind_sig_conditioning.png" alt="LC Oscillations with signal conditioning"
+                    style="max-width: 100%;">
+                <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                    LC oscillations (yellow) & conditioned signal (blue)</figcaption>
+            </div>
+            <p>For inductance measurement, the methodology adopted was observation of resonant frequency of LC tank
+                circuit. When an inductor is placed parallel to a capacitor and a voltage is provided the circuit rings
+                at a frequency. This frequency is unique for each circuit and is the resonant frequency. Ideally the
+                resonance should continue indefinitely, but the presence of resistance acts as a damping force and the
+                oscillation decays.</p>
+
+            <p>An external op-amp was used to condition the analog signal and transform into a digital signal so that
+                the microcontroller can calculate the frequency and hence the inductance. The resonant frequency given
+                by (3)</p>
+
+            <p style="text-align: center;">f = 1 / (2&pi;&radic;(LC)) &nbsp;&nbsp;&nbsp;&nbsp;--------(3)</p>
+
+            <p>A capacitor of known value is used with the unknown inductor and the frequency is observed. The
+                inductance can then be computed from the given equation.</p>
+        </div>
+
+        <div id="components" class="content-section">
+            <h3>Components</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>IR2104</strong> - Half-Bridge Gate Driver (IR2110 can also be used for greater control
+                    flexibility)</li>
+                <li><strong>Arduino Nano</strong> - Microcontroller</li>
+                <li><strong>Op-Amp</strong> - LM339</li>
+                <li><strong>Capacitors</strong> - 0.47 µF (ceramic, 2), 100 nF (1), 470 µF (2)</li>
+                <li><strong>Diode</strong> - 1N4007 (1)</li>
+                <li><strong>Resistors</strong> - 10 kΩ (1), 150 Ω (1), 220 Ω (1), 330 Ω (2)</li>
+                <li><strong>Display</strong> - 16x2 LCD. </li>
+            </ul>
+        </div>
+
+
+
+
+
+        <div id="development" class="content-section">
+            <h3>Development</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 1px ;row-gap: 16px; margin: 16px 0;">
+
+                <figure
+                    style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                    <img src="../../images/lcr_ckt.png" alt="LCR" style=" max-width: 70%; ">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        LC Meter Overview</figcaption>
+                </figure>
+
+
+
+                <figure style="margin: 0; display: flex; flex-direction: column; align-items: center;">
+                    <img src="../../images/cap_ckt.png" alt="Assembled" style=" max-width: 80%;">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        Capacitance Measurement Schematic</figcaption>
+                </figure>
+
+                <figure style="margin: 0; display: flex; flex-direction: column; align-items: center;">
+                    <img src="../../images/ind_ckt.png" alt="Testing" style="width:auto; height: 93%; max-width: 80%; ">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        Inductance Measurement Schematic</figcaption>
+                </figure>
+                <figure
+                    style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                    <img src="../../images/lcr_setup.png" alt="LCR" style=" max-width: 80%; ">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        LC Meter Setup on a breadboard</figcaption>
+                </figure>
+
+
+            </div>
+
+
+    </main>
+    <footer>
+        <span>&copy;2026 Sayan Saha </span>
+        <span>
+            <a href="https://www.linkedin.com/in/sayan-saha-626a5a28b/" target="_blank" title="Open Linkedin Profile">
+                <i class="fa-brands fa-linkedin fa-xl"></i>
+                LinkedIn
+            </a>
+            <a href="mailto:sayan.s.personal@gmail.com" title="Open Mail">
+                <i class="fa-regular fa-envelope fa-xl"></i>
+                E-Mail
+            </a>
+        </span>
+    </footer>
+</body>
+
+</html>
