@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Quadrant Drive</title>
+    <script src="https://kit.fontawesome.com/b36891ad23.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="wrap">
+            <div class="logo">SAYAN SAHA</div>
+
+            <div class="tabbar">
+                <a href="../../index.html">Home</a>
+
+                <a href="../../projects.html" class="active">Projects</a>
+
+            </div>
+            <details class="mobile-menu">
+                <summary>☰</summary>
+                <div class="mobile-links">
+                    <a href="../../index.html">Home</a>
+
+                    <a href="../../projects.html">Projects</a>
+
+                </div>
+            </details>
+        </nav>
+    </header>
+
+
+
+
+
+
+
+
+    <main class="wrap project-layout">
+
+        <div class="project-content">
+            <h2>Four-Quadrant DC Motor Drive</h2>
+
+            <div id="Introduction" class="content-section">
+                <h3>Introduction</h3>
+                <div class="wiki-thumb">
+                    <img src="../../images/four_quadrant_drive/quadrant_operation.png" alt="Quadrant operation" style="max-width: 100%;">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        Quadrant operation</figcaption>
+                </div>
+                <p>A hardware implementation of a Class E DC chopper circuit to achieve four-quadrant control of a
+                    permanent magnet DC (PMDC) motor. The system enables forward motoring, reverse motoring, forward
+                    braking, and reverse braking. It utilizes Pulse Width Modulation (PWM) for precise speed regulation
+                    and directional control. This was a team project with <a
+                        href="https://www.linkedin.com/in/harshakvp/" target="_blank"
+                        title="Open Linkedin Profile">Harshak V P</a>.
+                </p>
+            </div>
+
+            <div id="Insights" class="content-section">
+                <h3>Class E Chopper</h3>
+                <div class="wiki-thumb">
+                    <img src="../../images/four_quadrant_drive/class_e_chopper.png" alt="class e chopper" style="max-width: 100%;">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        Class E chopper</figcaption>
+                </div>
+                <p>A Class E chopper is capable of bidirectional power flow, enabling full four-quadrant motor
+                    operation. The operating modes are defined as follows:</p>
+                <ul>
+                    <li><strong>First Quadrant (Forward Motoring):</strong> The chopper acts as a step-down converter
+                        where both output voltage and load current are positive.</li>
+                    <li><strong>Second Quadrant (Forward Braking):</strong> The chopper behaves as a step-up converter
+                        with positive output voltage and negative load current.</li>
+                    <li><strong>Third Quadrant (Reverse Motoring):</strong> The motor is connected with opposite
+                        polarity, resulting in negative output voltage and negative load current.</li>
+                    <li><strong>Fourth Quadrant (Reverse Braking):</strong> The output voltage is negative while the
+                        load current is positive.</li>
+                </ul>
+            </div>
+
+
+            <div id="details" class="content-section">
+                <h3>Circuit Overview </h3>
+
+                <p>The hardware architecture is divided into control, driver, and power stages. In the control stage, an
+                    ATmega328P microcontroller reads inputs from three push buttons for quadrant selection and a 10 kΩ
+                    potentiometer for analog speed control. It generates the necessary PWM logic while
+                    maintaining a 100 µs dead time during transitions to prevent shoot-through short
+                    conditions.</p>
+
+                <p>In the driver stage, two IR2110 MOSFET gate driver ICs independently drive the high and low-side
+                    MOSFETs of the H-bridge. A bootstrap network utilizing a 0.22µF capacitor and a
+                    ultra-fast recovery diode provides the required high-side gate voltages without switching
+                    delays.</p>
+
+                <p>The power stage consists of a full H-bridge topology constructed with four IRFZ44N N-channel power
+                    MOSFETs. These MOSFETs are used to directly drive a 12V permanent magnet DC
+                    motor.</p>
+                <figure
+                    style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                    <img src="../../images/four_quadrant_drive/drive-stages.png" alt="Overview" style=" max-width: 100%; ">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        Overview</figcaption>
+                </figure>
+
+            </div>
+
+
+
+
+            <div id="components" class="content-section">
+                <h3>Components</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Arduino ATmega328P: </strong> Microcontroller for control logic and PWM generation.</li>
+                    <li><strong>IR2110: </strong> MOSFET gate driver ICs for driving the high and low-side MOSFETs.</li>
+                    <li><strong>IRFZ44N: </strong> N-Channel power MOSFETs used for the full H-bridge topology.</li>
+                    <li><strong>DC Motor: </strong> 12V permanent magnet DC (PMDC) motor.</li>
+                    <li><strong>UF4007: </strong> Ultra-fast recovery diodes for the bootstrap circuit.</li>
+                    <li><strong>Passives: </strong> Resistors (10 &Omega;) and capacitors (0.1&micro;F, 0.22&micro;F,
+                        22&micro;F, 100&micro;F).</li>
+                    <li><strong>Inputs: </strong> 10 k&Omega; potentiometer for speed control and push buttons for
+                        quadrant selection.</li>
+                </ul>
+            </div>
+
+
+
+
+
+            <div id="development" class="content-section">
+                <h3>Development</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 1px ;row-gap: 16px; margin: 16px
+                    0;">
+
+                    <figure
+                        style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/four-quadrant-drive-setup.png" alt="Setup" style=" max-width: 70%; ">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            Final Setup</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </main>
+    <aside class="sidebar-nav">
+        <ul>
+            <li>
+                <a href="../../projects.html"
+                    style="color: #051923; font-weight: bold; text-decoration: none; padding-right: 20px; border-right: 2px solid var(--border-subtle);">
+                    <i class="fa-solid fa-arrow-left"></i> Back
+                </a>
+            </li>
+            <li><a href="#Introduction">Introduction</a></li>
+            <li><a href="#Insights">Insights</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#development">Development</a></li>
+
+        </ul>
+    </aside>
+
+    <footer>
+        <span>&copy;2026 Sayan Saha </span>
+        <span>
+            <a href="https://www.linkedin.com/in/sayan-saha-626a5a28b/" target="_blank" title="Open Linkedin Profile">
+                <i class="fa-brands fa-linkedin fa-xl"></i>
+                LinkedIn
+            </a>
+            <a href="mailto:sayan.s.personal@gmail.com" title="Open Mail">
+                <i class="fa-regular fa-envelope fa-xl"></i>
+                E-Mail
+            </a>
+        </span>
+    </footer>
+</body>
+
+</html>
