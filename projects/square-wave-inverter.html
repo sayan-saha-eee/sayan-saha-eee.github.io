@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square Wave Inverter</title>
+    <script src="https://kit.fontawesome.com/b36891ad23.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="wrap">
+            <div class="logo">SAYAN SAHA</div>
+
+            <div class="tabbar">
+                <a href="../../index.html">Home</a>
+
+                <a href="../../projects.html" class="active">Projects</a>
+
+            </div>
+            <details class="mobile-menu">
+                <summary>☰</summary>
+                <div class="mobile-links">
+                    <a href="../../index.html">Home</a>
+
+                    <a href="../../projects.html">Projects</a>
+
+                </div>
+            </details>
+        </nav>
+    </header>
+
+
+
+
+
+
+
+
+    <main class="wrap project-layout">
+
+        <div class="project-content">
+            <h2>Square Wave Inverter</h2>
+
+            <div id="Introduction" class="content-section">
+                <h3>Introduction</h3>
+                <p>Square Wave Inverters are the simplest and most cost-effective solutions for
+                    applications where precise waveform quality is not a critical requirement. This project focuses on
+                    designing and implementing a square wave inverter that converts a 12V DC input into an AC output.
+                    The inverter utilizes a H-bridge and a timer circuit for the generation. It also features an
+                    overcurrent indication using op-amp.
+                </p>
+            </div>
+
+            <div id="Insights" class="content-section">
+                <h3>Circuit Overview</h3>
+
+                <p> 555 IC used in astable multivibrator mode generates a 50% duty cycle pulse. A
+                    MOSFET H-bridge is present. One half of the H-bridge receives the input from the astable
+                    multivibrator while the other half of the H-Bridge receives the input from the BJT. The BJT acts
+                    as a NOT gate which inverts the output of 555 IC. This ensures that all the MOSFETs are not on
+                    at the same time. The H-bridge generates the ac waveform. There is an overcurrent detection circuit
+                    which uses low side current sensing.
+                </p>
+            </div>
+
+            <div id="details" class="content-section">
+                <h3>Timer Circuit </h3>
+                <div class="wiki-thumb">
+                    <img src="../../images/square_wave_inverter_astable_mode.png" alt="555 time in astable mode"
+                        style="max-width: 100%;">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        555 timer in astable mode</figcaption>
+                </div>
+                <p>The trigger and threshold pins are connected together so that there is no need of external trigger
+                    pulse. Initially the voltage source will start charging the capacitor through the resistors
+                    R<sub>1</sub>
+                    (as we used a diode to bypass R<sub>2</sub>). During this time, the trigger comparator will output 1
+                    because the input voltage at the trigger pin is lower than the 1/3 of the supply voltage. So, the
+                    Q&rsquo;
+                    of the flipflop will give 0 and the discharge transistor is closed. The output of the IC is high.
+                    Once the voltage across the capacitor reaches 1/3 of the supply voltage, the trigger comparator will
+                    give
+                    zero but the flipflop output is unchanged as, both the inputs are zero (memory state). So, the
+                    voltage across the capacitor will rise to 2/3 of the supply voltage and the threshold comparator
+                    will output 1. Now, flipflop inputs are R=1 and S=0, so, the output of Q&rsquo; is 1 and the
+                    capacitor will
+                    start discharging through the discharge transistor. So, the IC output is low. Now, the capacitor
+                    voltage
+                    drops to 2/3 but there will be no change in the flipflop output. When the capacitor voltage drops to
+                    1/3 of the supply voltage, the trigger comparator will output 1 and the discharge transistor will
+                    turn
+                    off. The capacitor starts charging again and the process repeats.
+                </p>
+                <p>We can calculate the on and off time using the following formula,</p>
+                <p>T<sub>1</sub> = 0.693(R<sub>1</sub> + R<sub>2</sub>) * C</p>
+
+                <p>But since the diodes are used to charge the capacitor through R<sub>1</sub> only,</p>
+                <p>
+                    T<sub>1</sub> = 0.693(R<sub>1</sub>) * C<br>
+                    T<sub>2</sub> = 0.693(R<sub>2</sub>) * C
+                </p>
+
+                <p>For 50% duty cycle, T<sub>1</sub> = T<sub>2</sub> which means R<sub>1</sub> = R<sub>2</sub></p>
+
+                <p>We have taken R<sub>1</sub> = R<sub>2</sub> = 1.2k&Omega;, C = 10uF. This combination generates
+                    approx.
+                    50Hz 50% duty cycle signal.</p>
+            </div>
+
+            <div id="details" class="content-section">
+                <h3>H-Bridge </h3>
+                <div class="wiki-thumb">
+                    <img src="../../images/square_wave_inverter_h_bridge.png" alt="h-bridge" style="max-width: 100%;">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        H-bridge</figcaption>
+                </div>
+                <p>The H-bridge in the inverter circuit consists of four switches (MOSFETs) arranged in a manner that
+                    allows
+                    current to flow in alternating directions through the load.</p>
+
+                <p>The H-bridge consists of 2 p-channel MOSFETs and 2 n-channel MOSFETs. The p-channel MOSFETs turn on
+                    when
+                    V<sub>gs</sub> is grounded and the n-channel MOSFETs turn on when V<sub>gs</sub> is equal to
+                    V<sub>cc</sub>. The left side gets the inverted signal from the astable multivibrator due to the BJT
+                    while the right side gets the signal directly from the astable multivibrator. This ensures that all
+                    the
+                    MOSFETs don&rsquo;t turn on at the same time.</p>
+
+                <p>When the output of the 555 IC is high, the right side of the H-bridge is HIGH and the left side of
+                    the
+                    H-bridge is LOW. MOSFETs Q3 and Q2 in the image turns on and the other MOSFETs are off. The current
+                    flows from left to right.</p>
+
+                <p>When the output of the 555 IC is LOW, the right side of the H-bridge is LOW and the left side of the
+                    H-bridge is HIGH. MOSFETs Q4 and Q1 in the image turns on and the other MOSFETs are off. The current
+                    flows from right to left. Hence, we get an AC output.</p>
+            </div>
+
+
+            <div id="details" class="content-section">
+                <h3>Overcurrent Protection </h3>
+                <div class="wiki-thumb">
+                    <img src="../../images/square_wave_inverter_overcurrent_sensing.png" alt="overcurrent_sensing"
+                        style="max-width: 100%;">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        Op-Amp based overcurrent sensing</figcaption>
+                </div>
+                <p>The overcurrent detection used here is low side current sensing. There are two op-amps used- U2A as a
+                    non
+                    inverting amplifier and U2B as comparator. The op-amp U2A takes the voltage drop across shunt
+                    resistor
+                    and amplifies it as a non-inverting amplifier. The output of U2A is fed to U2B which acts as a
+                    comparator. The potentiometer is used to set a reference voltage level. When the voltage of the
+                    non-inverting side(output of U2A) becomes higher than the reference voltage the output of U2B
+                    becomes
+                    high and we know about the overcurrent in the circuit.</p>
+            </div>
+
+
+            <div id="components" class="content-section">
+                <h3>Components</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>NE555P: </strong> 555 Timer IC for PWM generation</li>
+                    <li><strong>IRF540N & IRF9540N: </strong> N-Channel and P-Channel Power MOSFETs for the H-bridge
+                    </li>
+                    <li><strong>LM358: </strong> Operational Amplifier for overcurrent sensing</li>
+                    <li><strong>BC547: </strong> NPN BJT Transistor acting as a NOT gate</li>
+                    <li><strong>Passives: </strong> Resistors (1kΩ, 1.2kΩ, 22kΩ, 1Ω shunt), 10kΩ potentiometer, and
+                        capacitors (10µF, 100nF)</li>
+                    <li><strong>LEDs & Diodes: </strong> 1N4007 and indicator LEDs</li>
+                </ul>
+            </div>
+
+
+
+
+
+            <div id="development" class="content-section">
+                <h3>Development</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 1px ;row-gap: 16px; margin: 16px
+                    0;">
+
+                    <figure
+                        style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/square_wave_inverter_schematic.png" alt="Schematic"
+                            style=" max-width: 70%; ">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            Square Wave Inverter Schematic</figcaption>
+                    </figure>
+
+                    <figure
+                        style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/square_wave_inverter_ckt.png" alt="LCR" style=" max-width: 80%; ">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            Inverter prototype on a breadboard</figcaption>
+                    </figure>
+
+                    <figure
+                        style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/square_wave_inverter_scope.png" alt="scope" style=" max-width: 80%; ">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            Waveform on a scope</figcaption>
+                    </figure>
+                </div>
+                <p>With a DC input of 12 V the output voltage of 24.4Vpp was obtained. We can also notice that the
+                    frequency is 50.88Hz which is near our target frequency of 50Hz. Also, a current limit was adjusted
+                    as needed.</p>
+            </div>
+        </div>
+    </main>
+    <aside class="sidebar-nav">
+        <ul>
+            <li>
+                <a href="../../projects.html"
+                    style="color: #051923; font-weight: bold; text-decoration: none; padding-right: 20px; border-right: 2px solid var(--border-subtle);">
+                    <i class="fa-solid fa-arrow-left"></i> Back
+                </a>
+            </li>
+            <li><a href="#Introduction">Introduction</a></li>
+            <li><a href="#Insights">Insights</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#development">Development</a></li>
+
+        </ul>
+    </aside>
+
+    <footer>
+        <span>&copy;2026 Sayan Saha </span>
+        <span>
+            <a href="https://www.linkedin.com/in/sayan-saha-626a5a28b/" target="_blank" title="Open Linkedin Profile">
+                <i class="fa-brands fa-linkedin fa-xl"></i>
+                LinkedIn
+            </a>
+            <a href="mailto:sayan.s.personal@gmail.com" title="Open Mail">
+                <i class="fa-regular fa-envelope fa-xl"></i>
+                E-Mail
+            </a>
+        </span>
+    </footer>
+</body>
+
+</html>
