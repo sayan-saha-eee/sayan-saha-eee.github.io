@@ -245,13 +245,12 @@ main.project-layout {
 }
 
 .sidebar-nav {
-    position: sticky;
+     position: fixed;
     bottom: 24px;
-    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
     width: 90%;
     max-width: 800px;
-              transform: translateX(50%);
-
     margin: 0;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(8px);
