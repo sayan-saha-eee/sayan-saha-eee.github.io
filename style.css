@@ -245,10 +245,9 @@ main.project-layout {
 }
 
 .sidebar-nav {
-    position: fixed;
+    position: sticky;
     bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 0 auto;
     width: 90%;
     max-width: 800px;
     margin: 0;
