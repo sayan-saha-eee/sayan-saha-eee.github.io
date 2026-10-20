@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Speedometer</title>
+    <script src="https://kit.fontawesome.com/b36891ad23.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="wrap">
+            <div class="logo">SAYAN SAHA</div>
+
+            <div class="tabbar">
+                <a href="../../index.html">Home</a>
+
+                <a href="../../projects.html" class="active">Projects</a>
+
+            </div>
+            <details class="mobile-menu">
+                <summary>☰</summary>
+                <div class="mobile-links">
+                    <a href="../../index.html">Home</a>
+
+                    <a href="../../projects.html">Projects</a>
+
+                </div>
+            </details>
+        </nav>
+    </header>
+
+
+    <main class="wrap project-layout">
+        <aside class="sidebar-nav">
+            <ul>
+                <li><a href="#Introduction">Introduction</a></li>
+                <li><a href="#Insights">Insights</a></li>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#development">Development</a></li>
+
+            </ul>
+        </aside>
+
+        <div class="project-content">
+            <h2>Smart Speedometer</h2>
+
+            <div id="Introduction" class="content-section">
+                <h3>Introduction</h3>
+                <p>Traditional bicycle speedometers typically display only speed and distance, lacking comprehensive
+                    health, safety monitoring, or data logging. Professional multi-sensor units exist but are often
+                    prohibitively expensive. To address this gap, this project focuses on designing an affordable
+                    cycling speedometer. The system is built around an ESP32 and integrates real-time
+                    telemetry, rear-proximity vehicle alerts, and an automatic emergency SOS system.</p>
+            </div>
+
+            <div id="Insights" class="content-section">
+                <h3>Version 1: Smart Telemetry & Proximity</h3>
+                <div class="wiki-thumb">
+                    <img src="../../images/speedometer/speedo_v1.png" alt="Capacitor Charging" style="max-width: 100%;">
+                    <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                        Speedometer V1</figcaption>
+                </div>
+                <p>
+                    The initial version of the project focused on basic ride telemetry and rider safety.
+                </p>
+                <ul>
+                    <li>
+                        <p>Telemetry Data: An A3144 Hall Effect sensor calculates instantaneous speed and
+                            distance via wheel rotation. A DHT11 sensor tracks ambient temperature and
+                            humidity. An MPU6050 IMU measures the path's inclination.</p>
+                    </li>
+                    <li>
+                        <p>Rear Proximity Alert: A VL53L0X LiDAR sensor is used to measure the
+                            distance of objects behind the bicycle. It triggers a display alert if a vehicle
+                            approaches within 2 meters. This is helpful since the rider doesn't need to look back.</p>
+                    </li>
+                    <li>
+                        <p>Bluetooth Logging: Ride parameters are displayed on a 0.96" OLED screen and
+                            transmitted to a smartphone over Bluetooth. The "START"
+                            and "STOP" commands in the Bluetooth app is used to control the device. After the ride, a
+                            post-ride
+                            data summary is sent to the mobile
+                            device.</p>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <div id="Insights" class="content-section">
+                <h3>Version 2: Emergency SOS System</h3>
+
+                <p>
+                    In the second iteration, I added an automatic emergency SOS system that operates independently of a
+                    smartphone.
+                </p>
+                <ul>
+                    <li>
+                        <p>Crash & Fall Detection: : The MPU6050 accelerometer and gyroscope monitor for sudden impacts
+                            or
+                            unusual tilt angles. Impacts are detected if there is high acceleration. Falls are detected
+                            if
+                            the
+                            tilt
+                            angle exceeds 60°.</p>
+                    </li>
+                    <li>
+                        <p>SOS Dispatch: When a crash is detected, the system immediately attempts to lock onto
+                            GPS coordinates for up to 5 seconds using a NEO-6M module. It then uses a SIM800L GSM module
+                            to
+                            send
+                            an automated SMS-containing a Google Maps location link-to a pre-configured emergency
+                            contact.
+                            The
+                            system locks the display with a crash warning until the bicycle is physically returned to an
+                            upright
+                            position (less than 30 degrees).</p>
+                    </li>
+                </ul>
+
+
+            </div>
+
+            <div id="components" class="content-section">
+                <h3>Components</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>ESP32:</strong> Microcontroller</li>
+                    <li><strong>A3144:</strong> Hall Effect Sensor</li>
+                    <li><strong>DHT11:</strong> Temperature and Humidity Sensor</li>
+                    <li><strong>MPU6050:</strong> IMU (Accelerometer & Gyroscope)</li>
+                    <li><strong>VL53L0X:</strong> Time-of-Flight LiDAR Sensor</li>
+                    <li><strong>SIM800L:</strong> GSM Module</li>
+                    <li><strong>NEO-6M:</strong> GPS Module</li>
+                    <li><strong>OLED:</strong> 0.96-inch I2C Display</li>
+                </ul>
+            </div>
+
+
+
+
+
+            <div id="development" class="content-section">
+                <h3>Development</h3>
+                <div
+                    style="display: grid; grid-template-columns: 2fr 1fr; column-gap: 1px ;row-gap: 16px; margin: 16px 0;">
+
+
+                    <figure style="margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/speedometer/speedo_v2.png" alt=" Speedometer v2" style=" max-width: 100%;">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            Speedometer v2</figcaption>
+                    </figure>
+
+                    <figure style="margin: 0; display: flex; flex-direction: column; align-items: center;">
+                        <img src="../../images/speedometer/speedo_location.png" alt="SOS location"
+                            style="width:auto; height: 100%; max-width: 80%; ">
+                        <figcaption style="margin-top: 8px; font-size: 0.9rem; color: #3D4F44; text-align: center;">
+                            SOS location</figcaption>
+                    </figure>
+
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <span>&copy;2026 Sayan Saha </span>
+        <span>
+            <a href="https://www.linkedin.com/in/sayan-saha-626a5a28b/" target="_blank" title="Open Linkedin Profile">
+                <i class="fa-brands fa-linkedin fa-xl"></i>
+                LinkedIn
+            </a>
+            <a href="mailto:sayan.s.personal@gmail.com" title="Open Mail">
+                <i class="fa-regular fa-envelope fa-xl"></i>
+                E-Mail
+            </a>
+        </span>
+    </footer>
+</body>
+
+</html>
