@@ -250,6 +250,8 @@ main.project-layout {
     margin: 0 auto;
     width: 90%;
     max-width: 800px;
+              transform: translateX(50%);
+
     margin: 0;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(8px);
