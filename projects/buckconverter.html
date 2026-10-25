@@ -41,14 +41,14 @@
                 <p>
                     A buck converter is a DC-DC power converter that steps
                     down a higher DC input voltage to a lower DC output voltage.
-                    In typical buck converter, there is one switch and one freewheeling diode.
+                    In a typical buck converter, there is one switch and one freewheeling diode.
                     In a synchronous buck converter,there is a controlled switch
                     , instead of a freewheeling diode. It offers higher efficiency although comes at a cost of
                     complexity.
                 </p>
                 <p>In this project, I designed a synchronous
                     buck converter using the IR2104 half-bridge
-                    driver and IRLB8743 MOSFETs. </p>
+                    driver and IRLB8743 MOSFETs. This converter was very useful for me as I could use it as parts of other projects. </p>
             </div>
             <div id="Insights" class="content-section"></div>
             <h3>Synchronous Buck Converter</h3>
@@ -81,10 +81,10 @@
                 with a low-side MOSFET, significantly reducing conduction losses and improving high-current
                 efficiency.</p>
             <p><strong>Operation & Limitations:</strong> Proper gate driving and dead-time control are critical to
-                avoid shoot-through short circuits. The IR2104 handles this with a fixed 500ns dead time. While
+                avoid shoot-through. The IR2104 handles this with a fixed 500ns dead time. While
                 functioning as expected, the fixed dead-time and complementary switching limit control flexibility.
-                Additionally, reverse current backflow occurs when output voltage exceeds input voltage—a known
-                topology limitation.</p>
+                Additionally, reverse current can flow when output voltage exceeds input voltage —a known
+                topology limitation which makes the control tricky.</p>
         </div>
 
         <div id="components" class="content-section">
